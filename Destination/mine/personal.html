@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar-nav mui-bar">
+			<a href="" class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left"></a>
+			<h1 class="mui-title">编辑资料</h1>
+		</header>
+		<div class="mui-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						用户名：<input type="text" maxlength="20" class="mui-input-clear"/>
+					</li>
+					<li class="mui-table-view-cell" >
+						头像：<img id="touxiang" src="" width="40" height="40" alt="" style="border-radius: 50%;"  class="mui-pull-right"/>
+					</li>
+				</ul>
+				<button class="mui-btn mui-btn-blue mui-btn-block" style="margin-top: 50px;">保存</button>
+			</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			mui.plusReady(function(){
+				var login=JSON.parse(localStorage.getItem('loginNum'));
+				var user = document.getElementsByClassName('mui-input-clear')[0];
+				var pic_head = document.getElementsByTagName('img')[0]; 
+				user.value=login.username;
+				
+				//保存
+				document.getElementsByClassName('mui-btn')[0].addEventListener('tap',function(){
+					login.username=user.value;
+					localStorage.setItem("loginNum",JSON.stringify(login));
+					var mine=plus.webview.getWebviewById('mine.html');
+					mine.reload();
+					plus.nativeUI.toast("保存成功");
+					mui.back();
+				})
+				
+				//相册选择换头像
+					var perpic=document.getElementById('touxiang');
+					perpic.src=localStorage.getItem("pichead");
+				
+				var touxiang=document.getElementById("touxiang")
+				touxiang.addEventListener('tap',function(){
+					plus.gallery.pick( function(path){
+				        touxiang.src=path;
+				        localStorage.setItem("pichead",path)
+				    }, function ( e ) {
+				        console.log( "取消选择图片" );
+				    }, {filter:"image"} );
+				})
+			})
+		</script>
+	</body>
+
+</html>

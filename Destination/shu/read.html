@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			body{
+				background: url(../img/bg.jpg);
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!--<header class="mui-bar-nav mui-bar">
+			<h1 class="mui-title">终点小说网</h1>	
+		</header>-->
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			//创建子页面，并加载小说文章
+			mui.plusReady(function(){
+				var bookname=plus.webview.currentWebview().bookname;
+							
+				
+				if(localStorage.getItem("loginNum")){
+					if(!localStorage.getItem(bookname)){
+						localStorage.setItem(bookname,1);
+					}else{
+//						alert(localStorage.getItem(bookname))
+					}
+					
+					var content=plus.webview.create("content.html","content",{
+						top:"3px",
+						bottom:"10px",
+						zindex:2
+					});
+					content.show();
+				}else{
+					localStorage.setItem("nologin",1);
+					
+					var content=plus.webview.create("content.html","content",{
+						top:"3px",
+						bottom:"10px",
+						zindex:2
+					})
+					content.show()
+				}
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

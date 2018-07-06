@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-card{
+				margin: 0;
+			}
+			.mui-card-content{
+				text-align: center;
+				
+			}
+			.mui-card-content h5,.mui-card-content p{
+				color: white;
+			}
+			.mui-card-footer p{
+				color: #000000;
+			}
+			#mohu{
+				width: 100%;
+				height: 262px;
+				background:url("../img/lmzj.png") no-repeat;
+				background-size:100% ;
+				
+				position: absolute;
+				top: 0;
+				left: 0;
+				filter: blur(7px);
+			}
+			.mui-card-content img{
+				margin: 50px 0 0 0;
+			}
+			#header{
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 10;
+				background-color: transparent;
+			}
+			.footer{
+				width: 100%;
+				height: 50px;
+				background-color: yellowgreen;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+			#join,#read{
+				width:50%;
+				height:50px;
+				float: left;
+				text-align: center;
+				line-height: 50px;
+			}
+			#join{
+				background-color: white;
+			}
+			#read{
+				background-color: red;
+				color: white;
+			}
+			#catalog{
+				width: 90%; 
+				margin:0 auto; 
+				padding:5px 0;
+				font-size: 20px;
+				border-top: 1px solid #aaa;
+			}
+			p{
+				color: #000000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
+		</header>
+			<div class="mui-card">
+				<div id="mohu">
+					
+				</div>
+				<div class="mui-card-content">
+					<img src="../img/lmzj.png"/>
+					<h5 id="shuname" data-shuname="lmzj">黎明之剑</h5>
+					<p id="author">远瞳·著</p>
+				</div>
+				<div class="mui-card-footer">
+					<p>
+						
+						&nbsp;&nbsp;&nbsp;&nbsp;高文穿越了，但穿越的时候稍微出了点问题。<br />
+　　						&nbsp;&nbsp;&nbsp;&nbsp;在某个异界大陆上空飘了十几万年之后，他觉得自己可能需要一具身体才算是成为一
+						个完整的穿越者，但他并没想到自己好不容易成功之后竟然还需要带着
+						这具身体从棺材里爬出来，并且面对两个吓蒙了的曾曾曾曾……曾孙女。<br />
+　						　&nbsp;&nbsp;&nbsp;以及一个即将迎来纪元终结的世界。
+					</p>
+					
+				</div>
+				<div id="catalog" style="">
+						目录
+						<span id="lianzai">连载·第七张</span>
+						<a href="" class="mui-icon mui-icon-arrowright mui-pull-right"></a>
+					</div>
+			</div>
+			
+			<div class="mui-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<img src="../img/applogo.png"  class="mui-media-object mui-pull-left"/>
+						<div class="mui-media-body">
+							aaa
+							<p class="mui-ellipsis">很喜欢</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				</ul>				
+			</div>
+			<div style="width: 100%; height: 50px;"></div>
+			<div class="footer">
+				<div id="join">
+					加入书架
+				</div>
+				<div id="read">立即阅读</div>
+			</div>	
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script src="../js/read.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

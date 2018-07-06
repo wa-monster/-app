@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="" class="" id="clear">清除缓存</a>
+				</li>
+				<li class="mui-table-view-cell" id="word">
+					<a href="" class="mui-navigate-right">字体设置 <span id="fontFamily" style="float: right;margin-right:20px ;">ghawdhh</span></a>
+				</li>
+				<li class="mui-table-view-cell" id="help">
+					<a href="" class="mui-navigate-right">帮助</a>
+				</li>
+				<li class="mui-table-view-cell" id="roast">
+					<a href="" class="mui-navigate-right">吐槽</a>
+				</li>
+				<li class="mui-table-view-cell" id="about">
+					<a href="" class="mui-navigate-right">关于终点小说</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<p id="backlogin" style="text-align: center;color: red;">退出</p>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			document.getElementById('clear').addEventListener("tap",function(){
+				mui.alert('清除成功');
+			})
+			
+			var lists=[
+				['#word','./setting/word.html'],
+				['#help','./setting/help.html'],
+				['#about','./setting/about.html'],
+				['#roast','./setting/roast.html']
+			
+			]
+			
+			//显示当前字体
+			document.getElementById('fontFamily').innerHTML= localStorage.getItem("fontFamily");
+			
+			 
+			//点击进入字体设置
+			//点击进入帮助
+			//点击进入吐槽
+			//点击进入关于
+			for(var i=0;i<lists.length;i++){
+				sonTapAnima('.mui-table-view',lists[i][0],lists[i][1]);
+			}
+			
+			
+			
+			//退出，同时把loginNum的信息移交给zhanghao
+			mui(".mui-table-view-cell").on("tap","#backlogin",function(){
+				mui.plusReady(function(){
+					var login=JSON.parse(localStorage.getItem("loginNum"));
+					var zhanghao=JSON.parse(localStorage.getItem("zhanghao"));
+					for(var i=0;i<zhanghao.data.length;i++){
+						
+						if(login.name==zhanghao.data[i].name){
+							zhanghao.data[i]=login;
+						}
+					}
+					localStorage.setItem("zhanghao",JSON.stringify(zhanghao));
+					
+					plus.webview.create("../login.html","login.html").show()
+					localStorage.removeItem("loginNum");
+				})
+			})
+		</script>
+	</body>
+
+</html>

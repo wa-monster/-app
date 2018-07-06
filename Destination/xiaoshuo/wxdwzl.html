@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-card{
+				margin: 0;
+			}
+			.mui-card-content{
+				text-align: center;
+				
+			}
+			.mui-card-content h5,.mui-card-content p{
+				color: white;
+			}
+			.mui-card-footer p{
+				color: #000000;
+			}
+			#mohu{
+				width: 100%;
+				height: 262px;
+				background:url("../img/czltq.png") no-repeat;
+				background-size:100% ;
+				
+				position: absolute;
+				top: 0;
+				left: 0;
+				filter: blur(7px);
+			}
+			.mui-card-content img{
+				margin: 50px 0 0 0;
+			}
+			#header{
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 10;
+				background-color: transparent;
+			}
+			.footer{
+				width: 100%;
+				height: 50px;
+				background-color: yellowgreen;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+			#join,#read{
+				width:50%;
+				height:50px;
+				float: left;
+				text-align: center;
+				line-height: 50px;
+			}
+			#join{
+				background-color: white;
+			}
+			#read{
+				background-color: red;
+				color: white;
+			}
+			#catalog{
+				width: 90%; 
+				margin:0 auto; 
+				padding:5px 0;
+				font-size: 20px;
+				border-top: 1px solid #aaa;
+			}
+			p{
+				color: #000000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
+		</header>
+			<div class="mui-card">
+				<div id="mohu">
+					
+				</div>
+				<div class="mui-card-content">
+					<img src="../img/czltq.png"/>
+					<h5 id="shuname" data-shuname="wxdwzl">无限到武者路</h5>
+					<p id="author">饥饿2006·著</p>
+				</div>
+				<div class="mui-card-footer">
+					<p>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为中国最精锐的特种部队的格斗教练，他已经站在实战国术的巅峰。<br />
+　　然而他不无遗憾，因为人力有限，国术虽精，却仍然是有尽之“术”，而非无穷之“道”。他虽屹于绝顶，却也止步于此，再难寸进。<br />
+　　直到，他来到这个充满无限可能的世界……<br />
+　　本书是同人，却绝对不会是靠着copy起家的抄袭文，即使与原著相同的任务，也会写出不同的东西，并会尽量做到让读者即使没读过原著、没看过任务涉及到的电影，都不至于影响阅读。<br />
+　　由于主角的加入，原著的人物命运，将会有新的演绎，或许一个不起眼的炮灰，也会有属于他的光芒。<br />
+					</p>
+					
+				</div>
+				<div id="catalog" style="">
+						目录
+						<span id="lianzai">连载·第七张</span>
+						<a href="" class="mui-icon mui-icon-arrowright mui-pull-right"></a>
+					</div>
+			</div>
+			
+			<div class="mui-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<img src="../img/applogo.png"  class="mui-media-object mui-pull-left"/>
+						<div class="mui-media-body">
+							aaa
+							<p class="mui-ellipsis">很喜欢</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				</ul>				
+			</div>
+			<div style="width: 100%; height: 50px;"></div>
+			<div class="footer">
+				<div id="join">
+					加入书架
+				</div>
+				<div id="read">立即阅读</div>
+			</div>	
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script src="../js/read.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

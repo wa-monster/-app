@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar-nav mui-bar">
+			<a href="" class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left"></a>
+			<h1 class="mui-title">评论</h1>
+		</header>
+		<div class="mui-content">
+			<textarea name="" rows="" cols="" style="display: block; height:60px;margin: 10px auto;"></textarea>
+			<button class="mui-btn mui-btn-blue mui-btn-block">发表</button>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<!--<script src="../js/back.js"></script>-->
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+//				alert(plus.webview.currentWebview().bookname)
+				document.getElementsByClassName('mui-btn')[0].addEventListener('tap',function(){
+					var str=document.getElementsByTagName('textarea')[0].value;
+					
+					var bookid=plus.webview.currentWebview().bookname;
+					if(str==""){
+						mui.alert("评论为空，请填写评论在发表")
+					}else{
+						var e={
+							"bookid":bookid,
+							"txt":str,
+							"user":JSON.parse(localStorage.getItem("loginNum")).username
+						}
+						if(!localStorage.getItem("comment")){
+							var ee={
+								eee:[]
+							};
+							ee.eee.push(e);
+							
+							localStorage.setItem("comment",JSON.stringify(ee))
+						}else{
+//							localStorage.removeItem("comment");
+							var ee=JSON.parse(localStorage.getItem("comment"));
+							ee.eee.push(e);
+							localStorage.setItem("comment",JSON.stringify(ee));
+						}
+						alert("评论发表成功")
+						mui.back();
+					}
+				})
+				plus.webview.getWebviewById('shujia_menu.html').close();
+				plus.webview.getWebviewById("index.html").setStyle({mask:"none"});
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

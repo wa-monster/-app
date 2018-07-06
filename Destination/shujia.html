@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+   <style>
+   	.mui-slider-handle div{
+   		float:left;
+   	}
+   	.mui-slider-handle>span{
+			float: right;
+   	}
+   	.mui-icon-more{
+   		padding: 10px;
+   	}
+   </style>
+</head>
+<body>
+	<!--页面内容区域->
+	<div class="mui-content">
+		
+		<!--小说-->
+		<ul class="mui-table-view">
+			<!--<li class="mui-table-view-cell" data-l="lmzj">
+				<div class="mui-slider-right"> 
+					<button type="button" id="del" class="mui-btn mui-btn-red">删除</button>
+				</div>
+				<div class="mui-slider-handle mui-media">
+					<img class="mui-media-object mui-pull-left" src="img/lmzj.png"  />
+					<div class="mui-media-body">
+						黎明之剑
+						<p>远瞳</p>
+						<p>连载·第七章 那些古老的事情</p>
+					</div>
+					<span class="mui-icon mui-icon-more"></span>
+				</div>
+			</li>-->
+		</ul>
+	</div>
+	
+	 <script type="text/javascript" charset="utf-8">
+      	mui.init();
+      	
+      	function shijian(_this){
+//  		this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
+				var shuname=_this.parentNode.parentNode.getAttribute("data-l");
+				var zhanghao=JSON.parse(localStorage.getItem("zhanghao"));
+				var loginNum=JSON.parse(localStorage.getItem("loginNum"));
+				var n=loginNum.name;
+				
+				for(var i=0;i<loginNum.shu.length;i++){	
+							if(loginNum.shu[i].shu==shuname){
+//								zhanghao.data[i].shu.splice(j,1);
+								loginNum.shu.splice(i,1);
+								localStorage.setItem("loginNum",JSON.stringify(loginNum))
+//								alert(JSON.stringify(zhanghao.data[i].shu));
+							}
+				}
+				_this.parentNode.parentNode.remove();
+      	}
+      	
+      	function jinru(_this){
+	      		var bookname=_this.parentNode.getAttribute("data-l");
+	      		if(localStorage.getItem(bookname)){
+	      			
+	      		}else{
+	      			localStorage.setItem(bookname,1)
+	      		}
+	      		mui.plusReady(function(){
+	      			var index=localStorage.getItem(bookname);
+	      			mui.openWindow({
+	      				id:"read.html",
+	      				url:"shu/read.html",
+	      				extras:{
+	      					bookname:bookname
+	      				}
+	      			})
+	      		})
+      	}
+      	
+      	function more(_this,title){
+      		mui.plusReady(function(){
+      			var mask=plus.webview.getWebviewById('index.html');
+      			mask.setStyle({
+      				mask:"rgba(0,0,0,0.5)"
+      			});
+	      			mui.openWindow({
+	      				id:"shujia_menu.html",
+	      				url:"shujia_menu.html",
+	      				styles:{
+	      					top:"400px",
+	      					bottom:"0px"
+	      				},
+	      				extras:{
+	      					bookname:_this.parentNode.parentNode.getAttribute("data-l")
+	      				},
+	      				show:{
+	      					aniShow:"slide-in-bottom"
+	      				}
+	      			})
+//					var menu=plus.webview.create("shujia_menu.html","shujia_menu.html");
+//					menu.show();
+      			localStorage.setItem("shujia_head",title);
+      			mask.addEventListener('maskClick', function(){
+					mask.setStyle({mask:'none'});
+					menu.close();
+				},false);
+			
+      		})
+      	}
+      	
+      	function shu (){
+//    		alert(localStorage.getItem("loginNum"))
+      		if(!JSON.parse(localStorage.getItem("loginNum"))){
+      			return ;
+      		}
+      		
+			for(var j=0;j<JSON.parse(localStorage.getItem("loginNum")).shu.length;j++){
+				var loginid=JSON.parse(localStorage.getItem("loginNum"));
+	      		var ul=document.getElementsByClassName("mui-table-view")[0];
+	      		var li=document.createElement("li");
+	      		var div1=document.createElement("div");
+	      		var div2=document.createElement("div");
+	      		var button1=document.createElement("button");
+	      		var img=document.createElement("img");
+	      		var div2_div=document.createElement("div");
+	      		var p1=document.createElement("p");
+	      		var p2=document.createElement("p");
+	      		var span=document.createElement("span");
+	      		
+	      		li.className="mui-table-view-cell";
+	      		li.setAttribute("data-l",loginid.shu[j].shu);
+	      		div1.className="mui-slider-right";
+	      		div2.className="mui-slider-handle mui-media";
+	      		div2.addEventListener("tap",function(){
+	      			var _this=this;
+	      			jinru(_this);
+	      		})
+	      		button1.className="mui-btn mui-btn-red";
+	      		button1.setAttribute("id","del")
+	      		button1.innerHTML="删除";
+	      		button1.addEventListener("tap",function(){
+	      			
+	      			var _this=this;
+	      			shijian(_this);
+	      		})
+	      		img.src="img/"+loginid.shu[j].shu+".png";
+	      		img.className="mui-media-object mui-pull-left";
+	      		img.width="40";
+	      		div2_div.className="mui-media-body";
+	      		var shuming=loginid.shu[j].shuname;
+	      		div2_div.innerHTML=shuming;
+	      		p1.innerHTML=loginid.shu[j].author;
+	      		p2.innerHTML=loginid.shu[j].updata;
+	      		span.className="mui-icon mui-icon-more";
+	      		span.addEventListener("tap",function(e){
+	      			//more点击变色
+	      			this.style.backgroundColor="#999";
+	      			var _this=this;
+	      			setTimeout(function(){
+	      				_this.style.backgroundColor="#fff";
+	      			},500);
+	      			
+	      			more(_this,shuming);
+	      			e.stopPropagation();
+	      		})
+	      		div1.append(button1);
+	      		div2.append(img);
+	      		div2_div.append(p1);
+	      		div2_div.append(p2);
+	      		div2.append(div2_div);
+	      		div2.append(span);
+	      		li.append(div1)
+	      		li.append(div2);
+	      		ul.append(li);
+			}
+      		
+      	}
+      	shu()
+      	
+    </script>
+</body>
+</html>

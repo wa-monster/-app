@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-pull-left{
+				width: 15%;
+				height: 40px;
+				line-height: 40px;
+				margin: 15px 0 15px 27px;
+				border: 1px solid #000;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-bar mui-bar-nav">
+			<h1 class="mui-title"></h1>
+		</div>
+		<div class="mui-content">
+			<div class="mui-pull-left" id="del">删除</div>
+			<div class="mui-pull-left" id="catalog">目录</div>
+			<div class="mui-pull-left" id="reward">打赏</div>
+			<div class="mui-pull-left" id="evaluate">评价</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				mui.back=function (){
+					plus.webview.getWebviewById("index.html").setStyle({mask:"none"});
+					plus.webview.currentWebview().close();
+				}
+				document.getElementsByClassName('mui-title')[0].innerHTML=localStorage.getItem('shujia_head')
+				document.getElementById('del').addEventListener("tap",function(){
+					mui.confirm("确认要删除嘛","awd",["是","否"],function(e){
+						if(e.index == 0){
+							shijian();
+							mui.back();
+						}else{
+							
+						}
+					})
+					
+					
+				})
+				
+				document.getElementById('catalog').addEventListener("tap",function(){
+					var wv=plus.webview.create("txt/catalog.html","catalog.html");
+					wv.show();
+					mui.back();
+				
+				})
+
+				document.getElementById('reward').addEventListener("tap",function(){
+					mui.alert("谢谢打赏");
+				})		
+				
+				document.getElementById('evaluate').addEventListener("tap",function(){
+//					var wv=plus.webview.create("txt/evaluate.html","evaluate.html");
+//					wv.show();
+					mui.openWindow({
+						id:"evaluate.html",
+						url:'txt/evaluate.html',
+						extras:{
+							bookname:plus.webview.currentWebview().bookname
+						}
+					})
+//					mui.back();
+				})
+				function shijian(_this){
+						var shuname=plus.webview.currentWebview().bookname;
+						var zhanghao=JSON.parse(localStorage.getItem("zhanghao"));
+						var loginNum=JSON.parse(localStorage.getItem("loginNum"));
+						var n=loginNum.name;
+						
+						for(var i=0;i<loginNum.shu.length;i++){	
+									if(loginNum.shu[i].shu==shuname){
+										loginNum.shu.splice(i,1);
+										localStorage.setItem("loginNum",JSON.stringify(loginNum));
+										
+									}
+						}
+						plus.webview.getWebviewById("shujia.html").reload();
+		      	}	
+			})
+			
+      	
+			
+		</script>
+	</body>
+
+</html>

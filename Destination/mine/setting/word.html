@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<style>
+			.mui-icon-checkmarkempty{
+				float: right;
+				margin-right: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar-nav mui-bar">
+			<span class="mui-icon mui-action-back mui-icon-arrowleft mui-pull-left"></span>
+			<h1 class="mui-title">字体设置</h1>
+		</header>
+		
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell"><span >微软雅黑</span><span class="mui-icon "></span></li>
+				<li class="mui-table-view-cell"><span>黑体</span><span class="mui-icon "></span></li>
+				<li class="mui-table-view-cell"><span>楷体</span><span class="mui-icon "></span></li>
+				<li class="mui-table-view-cell"><span>宋体</span><span class="mui-icon "></span></li>
+				<li class="mui-table-view-cell"><span>仿宋</span><span class="mui-icon "></span></li>
+			</ul>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			!function (d){
+				var li=d.getElementsByClassName('mui-table-view-cell');
+				for(var i=0;i<li.length;i++){
+					var word=li[i].firstElementChild;
+					if(localStorage.getItem("fontFamily")===word.innerHTML){
+						li[i].lastElementChild.className="mui-icon mui-icon-checkmarkempty";
+					}
+					li[i].addEventListener("tap",function(){
+						localStorage.setItem('fontFamily',this.firstElementChild.innerHTML);
+						document.getElementsByClassName('mui-icon-checkmarkempty')[0].classList.remove('mui-icon-checkmarkempty');
+						this.lastElementChild.classList.add('mui-icon-checkmarkempty');
+						mui.plusReady(function(){
+							var set=plus.webview.getWebviewById("mine/setting.html");
+							set.reload();
+							
+						})
+					})
+				}
+				
+				
+				//mui-icon-checkmarkempty
+			}(document)
+			
+			
+		</script>
+	</body>
+
+</html>

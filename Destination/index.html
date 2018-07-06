@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-bar-nav{
+				background-color: #0099cc;
+			}
+			#search{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 30px;
+				 margin-top:5px ;
+				 z-index: 10;
+				 display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--页头-->
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">终点小说</h1>
+			<input  type="text" name="" id="search" value="" />
+			<span class="mui-icon mui-icon-search mui-pull-right"></span>
+		</header>
+		
+		<!-- 页脚导航菜单 -->
+		<nav class="mui-bar mui-bar-tab">
+			<a href="javascript:;" class="mui-tab-item mui-active" data-index="0">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">发现</span>
+			</a>
+			
+			<a href="javascript:;" class="mui-tab-item" data-index="1">
+				<span class="mui-icon mui-icon-navigate"></span>
+				<span class="mui-tab-label">书架</span>
+			</a>
+			
+			<a href="javascript:;" class="mui-tab-item" data-index="2">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			var index=0;
+			var pageson=["finding.html","shujia.html","mine.html"];
+			//html plus 操作
+			mui.plusReady(function(){
+				//获取本页对象
+	      		var self=plus.webview.currentWebview();
+	      		
+	      		//创建子页面对象并添加到页面
+	      			var pagechild=plus.webview.create(pageson[0],pageson[0],{
+		      			top:"40px",
+		      			bottom:"50px"
+		      		});
+		      		self.append(pagechild);
+				
+				
+				//点击footer切换页面，同时添加显示条件
+				mui("nav.mui-bar-tab").on("tap",".mui-tab-item",function(e){
+					var i=this.getAttribute("data-index");
+				
+					if(i!=index){
+							if(!localStorage.getItem("loginNum")){
+									var login=plus.webview.create("login.html");
+									login.show();
+									plus.webview.currentWebview().hide();
+									return ;
+							}else{
+								var self=plus.webview.currentWebview();
+								var pagechild=plus.webview.create(pageson[i],pageson[i],{
+					      			top:"40px",
+					      			bottom:"50px"
+					      		});
+					      		self.append(pagechild);
+							}
+						plus.webview.show(pageson[i]);
+						plus.webview.close(pageson[index]);
+						index=i;
+					}
+					
+				})
+				var book=[
+					["悟空传",'wkz'],
+					["九仙图",'jxt'],
+					["黎明之剑",'lmzj'],
+					["大龙挂了",'dlgl'],
+					["崇祯聊天群",'czltq'],
+					['无限道武者路','wxdwzl'],
+					['主神大道','zsdd'],
+					['大王饶命','dwrm'],
+					['疯巫妖的实验日志','fwydsyrz']
+				]
+
+				var searchpress=0;
+				document.getElementsByClassName('mui-icon-search')[0].addEventListener('tap',function(){
+					searchpress++;
+					if(searchpress==1){
+						document.getElementById('search').style.display="block";
+						return ;
+					}
+					if(searchpress==2){
+						
+						var se=document.getElementById('search');
+						se.style.display="none";
+						var searchname=se.value;
+						se.value="";
+						for(item in book){
+//							alert(item)
+							if(book[item][0]==searchname){
+								var asda=plus.webview.create("./xiaoshuo/"+book[item][1]+".html",book[item][1]+".html");
+								asda.show();
+								break;
+							}else{
+								if(item!=8){
+									continue;
+								}
+								mui.openWindow({
+									url:"nobook.html",
+									id:"nobook.html"
+								})
+							}
+						}
+						searchpress=0;
+					}
+				})
+	      		
+	      		
+      		});
+			
+			//字体设置
+			function isfontFamily(){
+				if(!localStorage.getItem('fontFamily')){
+					localStorage.setItem("fontFamily","微软雅黑")
+				}
+			}
+			isfontFamily();
+			
+			//back退出app
+			var backindex = 0;
+			mui.back = function(event) {
+						backindex++;
+						if (backindex > 1) {
+							plus.runtime.quit();
+						} else {
+							plus.nativeUI.toast('再按一次退出应用');
+						}
+						setTimeout(function() {
+							backindex = 0;
+						}, 1000);
+						return false;
+			};	
+		</script>
+	</body>
+
+</html>

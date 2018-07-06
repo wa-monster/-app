@@ -1,0 +1,179 @@
+{
+  "index.html": {
+    "refer": [
+      "footer.html",
+      "shujia.html",
+      "mine.html",
+      "finding.html",
+      "login.html",
+      "nobook.html",
+      "xiaoshuo/lmzj.html",
+      "xiaoshuo/jxt.html",
+      "xiaoshuo/dwrm.html"
+    ],
+    "resources": [
+      "footer.html",
+      "shujia.html",
+      "finding.html"
+    ]
+  },
+  "login.html": {
+    "refer": [
+      "req.html",
+      "zhuce.html",
+      "index.html",
+      "wangjimima.html"
+    ],
+    "resources": []
+  },
+  "zhuce.html": {
+    "refer": [
+      "login.html"
+    ],
+    "resources": []
+  },
+  "wangjimima.html": {
+    "refer": [
+      "login.html"
+    ],
+    "resources": []
+  },
+  "mine.html": {
+    "refer": [
+      "setting.html",
+      "mine/setting.html",
+      "news.html",
+      "mine/personal.html",
+      "mine/news.html",
+      "mine/share.html"
+    ],
+    "resources": [
+      "fonts/NýLw.ttf"
+    ]
+  },
+  "setting.html": {
+    "refer": [
+      "login.html"
+    ],
+    "resources": []
+  },
+  "shujia.html": {
+    "refer": [
+      "shu/read.html",
+      "mask.html",
+      "shujia_menu.html"
+    ]
+  },
+  "shu/read.html": {
+    "refer": [
+      "shu/content.html"
+    ],
+    "resources": [
+      "shu/content.html"
+    ]
+  },
+  "shu/content.html": {
+    "refer": [
+      "shu/eassyend.html"
+    ],
+    "resources": [
+      "fonts/NýLw.ttf"
+    ]
+  },
+  "shu/eassyend.html": {
+    "refer": [
+      "shu/content.html"
+    ]
+  },
+  "finding.html": {
+    "refer": [
+      "find/xuanhuan.html",
+      "find/xianxia.html",
+      "find/lishi.html",
+      "find/kehuan.html",
+      "find/dushi.html",
+      "find/youxi.html"
+    ]
+  },
+  "find/xianxia.html": {
+    "refer": [
+      "xiaoshuo/jxt.html",
+      "xiaoshuo/wkz.html"
+    ]
+  },
+  "find/xuanhuan.html": {
+    "refer": [
+      "xiaoshuo/lmzj.html",
+      "xiaoshuo/dlgl.html"
+    ]
+  },
+  "find/lishi.html": {
+    "refer": [
+      "xiaoshuo/czltq.html"
+    ]
+  },
+  "find/kehuan.html": {
+    "refer": [
+      "xiaoshuo/wxdwzl.html",
+      "xiaoshuo/zsdd.html"
+    ]
+  },
+  "find/dushi.html": {
+    "refer": [
+      "xiaoshuo/dwrm.html"
+    ]
+  },
+  "find/youxi.html": {
+    "refer": [
+      "xiaoshuo/fwydsyrz.html"
+    ]
+  },
+  "xiaoshuo/czltq.html": {
+    "refer": [
+      "shu/read.html",
+      "login.html"
+    ]
+  },
+  "mine/setting.html": {
+    "refer": [
+      "login.html",
+      "mine/setting/word.html",
+      "mine/setting/roast.html",
+      "mine/setting/about.html",
+      "mine/setting/help.html"
+    ]
+  },
+  "xiaoshuo/wkz.html": {
+    "refer": [
+      "shu/read.html"
+    ]
+  },
+  "xiaoshuo/dlgl.html": {
+    "refer": [
+      "shu/read.html",
+      "login.html"
+    ]
+  },
+  "guide.html": {
+    "refer": [
+      "main.html"
+    ]
+  },
+  "main.html": {
+    "refer": [
+      "index.html",
+      "guide.html"
+    ]
+  },
+  "xiaoshuo/lmzj.html": {
+    "refer": [
+      "shu/read.html"
+    ]
+  },
+  "shujia_menu.html": {
+    "refer": [
+      "txt/catalog.html",
+      "txt/evaluate.html"
+    ]
+  }
+}

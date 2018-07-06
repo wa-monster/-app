@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-card{
+				margin: 0;
+			}
+			.mui-card-content{
+				text-align: center;
+				
+			}
+			.mui-card-content h5,.mui-card-content p{
+				color: white;
+			}
+			.mui-card-footer p{
+				color: #000000;
+			}
+			#mohu{
+				width: 100%;
+				height: 262px;
+				background:url("../img/zsdd.png") no-repeat;
+				background-size:100% ;
+				
+				position: absolute;
+				top: 0;
+				left: 0;
+				filter: blur(7px);
+			}
+			.mui-card-content img{
+				margin: 50px 0 0 0;
+			}
+			#header{
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 10;
+				background-color: transparent;
+			}
+			.footer{
+				width: 100%;
+				height: 50px;
+				background-color: yellowgreen;
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+			#join,#read{
+				width:50%;
+				height:50px;
+				float: left;
+				text-align: center;
+				line-height: 50px;
+			}
+			#join{
+				background-color: white;
+			}
+			#read{
+				background-color: red;
+				color: white;
+			}
+			#catalog{
+				width: 90%; 
+				margin:0 auto; 
+				padding:5px 0;
+				font-size: 20px;
+				border-top: 1px solid #aaa;
+			}
+			p{
+				color: #000000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header id="header">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></span>
+		</header>
+			<div class="mui-card">
+				<div id="mohu">
+					
+				</div>
+				<div class="mui-card-content">
+					<img src="../img/zsdd.png"/>
+					<h5 id="shuname" data-shuname="zsdd">主神大道</h5>
+					<p id="author">古月居士·著</p>
+				</div>
+				<div class="mui-card-footer">
+					<p>
+						时间游荡，生命掌握在谁的手上?<br />
+						星河浩瀚 ，尘埃浮游漂向到何方?<br />
+						悠悠苍古，是谁在历史的长廊歌唱?<br />
+						长发满头，忽抬头凝望一生的时光?<br />
+						朝花夕拾，物飞流光。<br />
+						谁才是历史长河中璀璨的星光?<br />
+						成王败寇，悲凉枭雄。<br />
+						胜者绘画历史歌卷，败者悲愤浅吟歌唱。<br />
+						古来圣贤皆寂寞，遥遥千载时光过。<br />
+						命运究竟掌握在谁的手中?<br />
+						博弈天地棋局，笑谈百世人生。<br />
+						渺渺众生，皆为棋子。<br />
+						一生奋斗却不过是别人棋盘上的一卒。<br />
+						多元纵横，睥睨一切。<br />
+						无限挣扎只是我手指间的一抹余晖。<br />
+						欢迎来到主神的世界，欢迎来到我的世界……<br />
+					</p>
+					
+				</div>
+				<div id="catalog" style="">
+						目录
+						<span id="lianzai">连载·第七张</span>
+						<a href="" class="mui-icon mui-icon-arrowright mui-pull-right"></a>
+					</div>
+			</div>
+			
+			<div class="mui-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<img src="../img/applogo.png"  class="mui-media-object mui-pull-left"/>
+						<div class="mui-media-body">
+							aaa
+							<p class="mui-ellipsis">很喜欢</p>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				            <img class="mui-media-object mui-pull-left" src="../img/czltq.png">
+				            <div class="mui-media-body">
+				                	幸福
+				                <p class='mui-ellipsis'>书写的挺好，就是太水了</p>
+				            </div>
+				    </li>
+				</ul>				
+			</div>
+			<div style="width: 100%; height: 50px;"></div>
+			<div class="footer">
+				<div id="join">
+					加入书架
+				</div>
+				<div id="read">立即阅读</div>
+			</div>	
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script src="../js/read.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

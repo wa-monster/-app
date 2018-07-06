@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			img{
+				float: left;
+			}
+			#awdawd{
+				width: 73%;
+				float: left;
+			}
+			.image{
+				width: 25%;
+				height: 33%;
+			}
+			p{
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar-nav mui-bar">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left "></a>
+				<h1 class="mui-title">终点小说网-玄幻</h1>
+			</header>
+			<div class="mui-content">
+				
+			</div>
+			<div class="mui-card" id="kwz">
+				<div class="mui-card-content">
+					<img class="image" src="../img/wkz.jpg"  alt="" />
+					<div id="awdawd">
+						<h3>悟空传</h3>
+						<p>今何在·著</p>
+						<p>西游，是一个关于一群人在路上想寻找当年失去的理想的故事。</p>
+					</div>
+					
+				</div>
+			</div>		
+			<div class="mui-card" id="jxt">
+				<div class="mui-card-content">
+					<img class="image" src="../img/jxt.jpg"  alt="" />
+					<div id="awdawd">
+						<h3>九仙图</h3>
+						<p>秋晨·著</p>
+						<p>修仙觅长生，热血任逍遥，踏莲曳波涤剑骨，凭虚御风塑圣魂！</p>
+					</div>
+					
+				</div>
+			</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			sonTapAnima("#kwz",".mui-card-content","../xiaoshuo/wkz.html");
+			sonTapAnima("#jxt",".mui-card-content","../xiaoshuo/jxt.html");
+		</script>
+	</body>
+
+</html>

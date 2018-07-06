@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<p>小说已经到最后一张了</p>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+//				document.addEventListener("swiperight",function(){
+//					var content1=plus.webview.create("content.html","content1",{
+//									top:"45px",
+//									bottom:"10px",
+//									zindex:2
+//					})
+//					content1.show();
+//					plus.webview.currentWebview().close();
+//				})
+			mui.plusReady(function(){
+				var self=plus.webview.currentWebview();
+						self.drag({
+									direction:"right",
+									moveMode:"followFinger"
+						},{},function(e){
+									if(e.type=="start"){
+										var content1=plus.webview.create("content.html","content1",{
+											top:"45px",
+											bottom:"10px",
+											zindex:0
+										})
+										content1.show();
+									};
+									if(e.type=="end"){
+										var selfStyle=self.getStyle();
+										if(selfStyle.left=="100%"){
+//											plus.webview.startAnimation({
+//												view:self,
+//												styles:{
+//													fromLeft:selfStyle.left,
+//													toLeft:"100%"
+//												},
+//											},{},function(){
+//												plus.webview.getWebviewById("content1").setStyle({
+//												zindex:2
+//												});
+//												self.close();
+//											})
+											e.result=true;
+											plus.webview.getWebviewById("content1").setStyle({
+												zindex:2
+											});
+											self.close();
+											
+									}else{
+//											plus.webview.startAnimation({
+//												view:self,
+//												styles:{
+//													fromLeft:selfStyle.left,
+//													toLeft:"0"
+//												},
+//											},{},function(){
+//												plus.webview.getWebviewById("content1").close()
+//											})
+													e.result=false;
+										}
+										
+									}
+						})
+			})
+						
+			mui.back=function(){
+					plus.webview.getWebviewById("read.html").close();
+					plus.webview.currentWebview().close();
+			}
+		</script>
+	</body>
+
+</html>

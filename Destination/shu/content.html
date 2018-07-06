@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			@font-face {
+			    /* font-properties */
+			    font-family: '行楷';
+			    src:url("../fonts/华文行楷.ttf")
+			}
+			html,body{
+				margin: 0;
+				padding: 0;
+				width:100%;
+				background: url(../img/bg.jpg);
+			}
+			#read{
+				width: 100%;
+				font-size: 20px;
+				background: url(../img/bg.jpg);
+				
+			}
+			h3{
+				text-align: center;
+			}
+			#awd{
+				font-family: "行楷";
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="read" class="mui-content" >
+			
+		</div>
+		<footer class="mui-bar-footer">
+				<p style="text-align: center;">本章完</p>
+		</footer>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				gestureConfig:{
+					hold:true
+				}
+			})
+			
+//			function word(){
+//				var fontFamily=localStorage.getItem("fontFamily");
+//				document.getElementById('read').style.fontFamily=fontFamily;
+//				alert(document.getElementById('read').style.fontFamily);
+//			}
+//			word();
+			
+			function load(bookname,index){
+				var xhr=new XMLHttpRequest();
+					var Url="../txt/"+bookname+"/"+bookname+index+".txt";
+//					alert(Url);
+					xhr.open("GET",Url,true);
+					xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var str=xhr.responseText;
+							document.getElementById("read").innerHTML=str
+						}
+					};
+					xhr.send();
+			}
+			//加载文章功能，自动加载到上次看的章节
+			mui.plusReady(function(){
+				var bookname=plus.webview.getWebviewById("read.html").bookname;
+				if(localStorage.getItem("loginNum")){
+					
+					var index=localStorage.getItem(bookname);
+//					alert(localStorage.getItem(bookname));
+					load(bookname,index);
+					ani(index,bookname);
+				}else{
+					var index=localStorage.getItem("nologin");
+					load(bookname,index);
+					ani(index,"nologin");
+				}
+
+					//滑动加载前一张或者后一张效果功能
+					
+			
+			})
+			
+			
+			function ani(index,bookname){
+						var self=plus.webview.currentWebview();
+						if(index==1){//如果是第一张，之绑定左滑事件
+								
+								self.drag({
+									direction:"left",
+									moveMode:"followFinger"
+								},{},function(e){
+									if(e.type=="start"){
+										index++;
+										localStorage.setItem(bookname,index);
+										
+										var content1=plus.webview.create("content.html","content1",{
+											top:"45px",
+											left:"1px",//不知道为什么，如果不设置left，或者left为0px，无法在左滑动的时候显示下一章或长一张，右滑动同理设置right
+											bottom:"10px",
+											zindex:1
+										})
+										content1.show();
+									}
+									if(e.type=="end"){
+										var selfStyle=self.getStyle();
+										if(selfStyle.left=="-100%"){
+											e.result=true;
+											plus.webview.getWebviewById("content1").setStyle({
+													zindex:2
+												});
+											self.close();
+									}else{
+											index--;
+											localStorage.setItem(bookname,index);
+												plus.webview.getWebviewById("content1").close()
+											e.result=false;
+										}
+										
+									}
+							})
+						}else{//如果不是第一张，绑定左滑和右划两个事件
+								if(index==7){//如果文章到最后一张，跳转到结束页面
+									
+									self.drag({
+										direction:"left",
+										moveMode:"followFinger"
+									},{},function(e){
+										if(e.type=="start"){
+											var eassyend=plus.webview.create("eassyend.html","eassyend",{
+											top:"45px",
+											bottom:"10px",
+											zindex:0
+											})
+											eassyend.show();
+										}
+										if(e.type=="end"){
+											
+											plus.webview.getWebviewById("eassyend").setStyle({
+												
+												zindex:2
+											})
+											self.close();
+										}
+									})
+	
+								}else{//如果不是最后一张
+									self.drag({
+										direction:"left",
+										moveMode:"followFinger"
+									},{
+		//								view:content1,
+		//								moveMode:"silent"
+									},function(e){
+										if(e.type=="start"){
+											index++;
+											localStorage.setItem(bookname,index);
+											
+											var content1=plus.webview.create("content.html","content1",{
+												top:"45px",
+												left:"1px",
+												bottom:"10px",
+												zindex:0
+											})
+											content1.show();
+										}
+										if(e.type=="end"){
+											var selfStyle=self.getStyle();
+											if(selfStyle.left=="-100%"){
+											e.result=true;
+											plus.webview.getWebviewById("content1").setStyle({
+													zindex:2
+												});
+												self.close();
+												
+											}else{
+												index--;
+												localStorage.setItem(bookname,index);
+												plus.webview.getWebviewById("content1").close()
+												e.result=false;
+											}
+											
+										}
+									})
+	
+								}
+								//如果不是第一张
+								self.drag({
+										direction:"right",
+										moveMode:"followFinger"
+								},{},function(e){
+										if(e.type=="start"){
+											index--;
+											localStorage.setItem(bookname,index);
+											
+											var content1=plus.webview.create("content.html","content1",{
+												top:"45px",
+												right:"1px",
+												bottom:"10px",
+												zindex:0
+											})
+											content1.show();
+										};
+										if(e.type=="end"){
+											var selfStyle=self.getStyle();
+											if(selfStyle.left=="100%"){
+												e.result=true;
+												plus.webview.getWebviewById("content1").setStyle({
+													zindex:2
+												});
+												self.close();
+												
+											}else{
+												index++;
+												localStorage.setItem(bookname,index);
+													plus.webview.getWebviewById("content1").close()
+														e.result=false;
+											}
+											
+										}
+								})		
+						}
+					}
+			
+			//关闭
+			mui.back=function(){
+				mui.plusReady(function(){
+					var read=plus.webview.getWebviewById("read.html");
+					read.close();
+					plus.webview.currentWebview().close();
+				})
+			}
+		</script>
+	</body>
+
+</html>

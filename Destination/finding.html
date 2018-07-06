@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-card-content{
+				padding-left: 3px;
+			}
+			.image{
+				width: 20%;
+				height: 30%;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!-- 书本分类 -->
+		<!-- 仙侠-->
+		<div class="mui-content">
+			<div class="mui-card" id="xianxia">
+				<div class="mui-card-header">仙侠</div>
+				<div class="mui-card-content">
+					<img class="image" src="img/wkz.jpg" alt="" />
+					<img class="image" src="img/jxt.jpg" alt="" />
+				</div>
+				<div class="mui-card-footer">我要这天，再遮不住我眼，要这地，再埋不了我心，要这众生，都明白我意，要那诸佛，都烟消云散！</div>
+			</div>
+			
+			<!--玄幻-->
+			<div class="mui-card" id="xuanhuan">
+				<div class="mui-card-header">玄幻</div>
+				<div class="mui-card-content">
+					<img class="image" src="img/lmzj.png"  alt="" />
+					<img class="image" src="img/dlgl.png"  alt="" />
+				</div>
+				<div class="mui-card-footer">三十年河东，三十年河西，莫欺少年穷！   ·····   此子，恐怖如斯！</div>
+			</div>
+			
+			<!--都市-->
+			<div class="mui-card" id="dushi">
+				<div class="mui-card-header">都市</div>
+				<div class="mui-card-content">
+					<img class="image" src="img/dwrm.jpg"  alt="" />
+				</div>
+				<div class="mui-card-footer">长发满头，忽抬头凝望一生的时光?
+	朝花夕拾，物飞流光。
+	谁才是历史长河中璀璨的星光?</div>
+			</div>
+			
+			<!--历史-->
+			<div class="mui-card" id="lishi">
+				<div class="mui-card-header">历史</div>
+				<div class="mui-card-content">
+					<img class="image" src="img/czltq.png" alt="" />
+				</div>
+				<div class="mui-card-footer">阻止最后一次野蛮对文明的征服</div>
+			</div>
+	
+			<!--科幻-->
+			<div class="mui-card" id="kehuan">
+				<div class="mui-card-header">科幻</div>
+				<div class="mui-card-content">
+					<img class="image" src="img/zsdd.png" alt="" />
+					<img class="image" src="img/wxdwzl.png" alt="" />
+				</div>
+				<div class="mui-card-footer">时间游荡，生命掌握在谁的手上?
+	星河浩瀚 ，尘埃浮游漂向到何方?</div>
+			</div>
+			
+			<!--游戏-->
+			<div class="mui-card" id="youxi">
+				<div class="mui-card-header">游戏</div>
+				<div class="mui-card-content">
+					<img class="image" src="img/fwydsyrz.jpg"  alt="" />
+				</div>
+				<div class="mui-card-footer">我!就是!!巫妖王!!!</div>
+			</div>
+		</div>
+		
+		<script src="js/mui.min.js"></script>
+		<script src="js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+
+			sonTapAnima(".mui-content","#xuanhuan","find/xuanhuan.html");
+			sonTapAnima(".mui-content","#xianxia","find/xianxia.html");
+			sonTapAnima(".mui-content","#dushi","find/dushi.html");
+			sonTapAnima(".mui-content","#lishi","find/lishi.html");
+			sonTapAnima(".mui-content","#kehuan","find/kehuan.html");
+			sonTapAnima(".mui-content","#youxi","find/youxi.html");
+			
+			
+			var backindex = 0;
+			mui.back = function(event) {
+						backindex++;
+						if (backindex > 1) {
+							plus.runtime.quit();
+						} else {
+							plus.nativeUI.toast('再按一次退出应用');
+						}
+						setTimeout(function() {
+							backindex = 0;
+						}, 1000);
+						return false;
+			};
+		</script>
+	</body>
+
+</html>

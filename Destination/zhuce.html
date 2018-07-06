@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			.mui-content{
+				margin-top: 35px;
+			}
+			.mui-input-row label{
+				width: 25%;
+			}
+			.mui-input-row label~input {
+				width: 75%;
+			}
+			#idjudge,#teljudge{
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h6 class="mui-title">注册</h6>
+		</header>
+				
+		<div class="mui-content">
+			<p class="mui-text-center">用户名长度在5到10个字符</p>
+			<p class="mui-text-center">密码长度在5到10个字符</p>
+			<p class="mui-text-center">请注意检查手机号是否填错</p>	
+			<form action="" class="mui-input-group">
+				<div class="mui-input-row">
+					<label>账号</label>
+					<input type="text" maxlength="20" data-p="idjudge" class="mui-input-clear" placeholder="请输入用户名" />
+				</div>
+						<p id="idjudge" class="mui-text-center"></p>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input type="password" class="mui-input-password" placeholder="请输入密码"></inpur>
+					
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input type="password" class="mui-input-password"  placeholder="请再输入密码"/>
+				</div>
+				<div class="mui-input-row">
+					<label>手机号</label>
+					<input type="text" maxlength="20" class="mui-input-clear" data-p="teljudge"  placeholder="请输入手机号"/>
+				</div>
+				<p id="teljudge"  class="mui-text-center"></p>
+				<div class="mui-content-padded">
+					<button type="button" class="mui-btn mui-btn-block mui-btn-blue">注册</button>
+				</div>
+			</form>
+
+			<span id="asd"></span>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/back.js"></script>
+		<script type="text/javascript">
+			mui.init();
+//经过操作发现， mui.init(
+//			   	keyEventBind:{
+//			   		backbutton:false 无法监听back返回键，至少在我的华为手机是这样的，需要自己重写mui.back方法
+//			   	}
+//			)
+			
+			   
+			//注册
+			if(window.localStorage){
+				
+				//本地存储是否有账号
+				if(localStorage.getItem("zhanghao")){
+					var data=localStorage.getItem("zhanghao");
+					data=JSON.parse(data);
+					for(var i=0;i<data.data.length;i++){
+						document.getElementById("asd").innerHTML+="<br>账号"+data.data[i].name+" 密码"+data.data[i].pwd+" 手机"+data.data[i].tel
+					}
+				}else{
+					var data={
+						data:[]
+					}
+				}
+				
+				//账号进行判定是否有重复的	
+				var noRepetition=0;
+				function judge(index,property){
+						document.getElementsByClassName("mui-input-clear")[index].addEventListener("change",function(){	
+							var zhanghao=JSON.parse(localStorage.getItem("zhanghao"));
+							if(zhanghao.data.length==0){
+								mui(".mui-content-padded").on("tap",".mui-btn",zhuce);
+								return ;
+							}else{
+								mui(".mui-content-padded").off("tap");
+							}
+							for(var i=0;i<zhanghao.data.length;i++){
+								if(document.getElementsByClassName("mui-input-clear")[index].value==zhanghao.data[i][property]){
+									
+									document.getElementById(this.getAttribute("data-p")).innerHTML="重复";
+									mui(".mui-content-padded").off("tap");
+									break;
+								}
+								if(i==zhanghao.data.length-1){
+									document.getElementById(this.getAttribute("data-p")).innerHTML="";
+									if(noRepetition==0){
+										mui(".mui-content-padded").on("tap",".mui-btn",zhuce);
+									}
+								}
+							}
+						});
+				}
+				judge(0,"name");
+				judge(1,"tel");
+				
+				//点击注册按钮进行数据储存
+				function zhuce(){
+					var txt=document.getElementsByClassName("mui-input-clear")[0].value;
+					var tel=document.getElementsByClassName("mui-input-clear")[1].value;
+					var pwd1=document.getElementsByClassName("mui-input-password")[0].value;
+					var pwd2=document.getElementsByClassName("mui-input-password")[1].value;
+					
+				//对注册信息进行判定
+					//判断是否有没填的
+					if(txt==""||pwd1==""||pwd2==""||tel==""){
+						mui.alert("请将信息填写完善");
+						return ;
+					}
+					
+					
+					//判断是否符合格式
+					if(txt.length<5||txt.length>10){
+						mui.alert("用户名长度必须在5到10个字符之间")
+						return ;
+					}
+					if(pwd1.length<5||pwd1.length>10){
+						mui.alert("密码长度必须在5到10个字符之间");
+						return ;
+					}
+					
+					//判断密码是否一致
+					if(pwd1!=pwd2){
+						mui.alert("两次输入的密码不一致");
+						return ;
+					}
+					
+					
+					//把注册的信息放入localStorage,并返回登陆页面
+					var obj={
+							"name":txt,
+							"pwd":pwd1,
+							"tel":tel,
+							"username":tel,
+							"shu":[{
+								"shu":"lmzj",
+								"shuname":"黎明之剑",
+								"author":"远瞳",
+								"updata":"连载·第七章 那些古老的事情",
+								"index":1
+							}]
+					}
+					data.data.push(obj);
+					localStorage.setItem("zhanghao",JSON.stringify(data));
+					plus.nativeUI.toast('注册成功');
+					mui.back()
+				}
+				
+				
+			}else{
+				mui.alert("不支持localstorage,无法注册");
+			}
+		</script>
+	</body>
+
+</html>

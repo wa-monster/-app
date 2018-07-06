@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h6 class="mui-title">注册</h6>
+		</header>
+		<div class="mui-content">
+			<form action="" class="mui-input-group">
+				<div class="mui-input-row">
+					<label>手机号</label>
+					<input type="password" class="mui-input-clear"  placeholder="请输入手机号"/>
+				</div>
+				<div class="mui-content-padded">
+					<button type="button" class="mui-btn mui-btn-block mui-btn-blue">确认</button>
+				</div>
+				
+			</form>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/back.js"></script>
+		<script type="text/javascript">
+			
+			
+			
+			mui.init()
+			
+			//显示所有帐号和密码
+			if(window.localStorage){
+				if(localStorage.getItem("zhanghao")){
+					var s=localStorage.getItem("zhanghao");
+					s=JSON.parse(s);
+					mui(".mui-content-padded").on("tap",".mui-btn",function(){
+						if(s.data.length==0){
+							mui.alert("此手机号未注册，请注册");
+							return ;
+						}
+						var tel=document.getElementsByClassName("mui-input-clear")[0].value;
+						for(var i=0;i<s.data.length;i++){
+							if(tel==s.data[i].tel){
+								var n=s.data[i].name;
+								var p=s.data[i].pwd;
+								mui.alert("账号:"+n+" 密码："+p);
+								continue;
+							}
+							if(i==s.data.length-1){
+								mui.alert("此手机号未注册，请注册")
+							}
+						}
+					})
+				}else{
+					mui.alert("没有任何账号，请先注册");
+				}
+			}else{
+				mui.alert("不支持localstorage");
+			}
+		</script>
+	</body>
+
+</html>

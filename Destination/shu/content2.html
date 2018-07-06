@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style>
+			html,body{
+				margin: 0;
+				padding: 0;
+				width:100%;
+				height: 100%;
+			}
+			#read{
+				width: 100%;
+				font-family: "微软雅黑";
+				
+			}
+			h3{
+				text-align: center;
+			}
+			#last,#next,#mid{
+				float:left;
+				z-index: 10;
+			}
+			#last{
+				width: 25%;
+				height: 100%;
+				background-color: #007AFF;
+				opacity: 0.3;
+			}
+			#next{
+				width: 25%;
+				height: 100%;
+				background-color: #007AFF;
+				opacity: 0.3;
+			}
+			#mid{
+				width:50%;
+				height: 100%;
+				background-color: #007AFF;
+				opacity: 0.3;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<div id="read" class="mui-content"></div>
+		<div id="last"></div>
+		<div id="next"></div>
+		<div id="mid"></div>
+		<footer class="mui-bar-footer">
+				<p style="text-align: center;">本章完</p>
+		</footer>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				gestureConfig:{
+					hold:true
+				}
+			})
+			
+			function load(bookname,index){
+				var xhr=new XMLHttpRequest();
+					var Url="../txt/"+bookname+"/"+bookname+index+".txt";
+					xhr.open("GET",Url,true);
+					xhr.onreadystatechange=function(){
+						if(xhr.readyState==4&&xhr.status==200){
+							var str=xhr.responseText;
+							document.getElementById("read").innerHTML=str
+						}
+					};
+					xhr.send();
+			}
+			//加载文章功能，自动加载到上次看的章节
+			mui.plusReady(function(){
+				if(!localStorage.getItem("next")){
+					localStorage.setItem("next",1)
+				}
+				
+				var bookname=plus.webview.getWebviewById("read.html").bookname;
+				alert(bookname);
+				if(localStorage.getItem("loginNum")){
+					
+					var login=JSON.parse(localStorage.getItem("loginNum"));
+					for(var i=0;i<login.shu.length;i++){
+						if(bookname==login.shu[i].shu){
+							var index=login.shu[i].index;
+							load(bookname,index);
+							var shu=ani(index,login.shu[i]);
+							login.shu[i]=shu;
+							localStorage.setItem("loginNum",JSON.stringify(login));
+						}
+					}
+					
+					
+				}
+//				else{
+//					var index=localStorage.getItem("nologin");
+//					load(bookname,index);
+//					ani(index,bookname);
+//				}
+			})
+			
+			//滑动加载前一张或者后一张效果功能
+			function ani(index,shu){
+						var self=plus.webview.currentWebview();
+						if(index==1&&localStorage.getItem("next")==1){//如果是第一张，绑定左滑事件
+//							index++;
+//							shu.index=index;
+							localStorage.setItem("next",2)
+							var content1=plus.webview.create("content.html",'content1',{
+								top:"45px",
+								bottom:"10px",
+								zindex:1
+							})
+							content1.show();	
+								
+						}else if(index==7){//如果不是第一张，绑定左滑和右划两个事件
+								
+								//如果不是第一张
+									
+						}else{
+							
+						}
+						
+						return shu;
+					}
+			
+			//关闭
+			mui.back=function(){
+				mui.plusReady(function(){
+					plus.webview.getWebviewById("read.html").close();
+//					plus.webview.getWebviewById("content1").close();
+					plus.webview.currentWebview().close();
+					
+				})
+			}
+		</script>
+	</body>
+
+</html>

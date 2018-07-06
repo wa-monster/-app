@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar-nav mui-bar">
+			<a href="" class="mui-action-back mui-icon mui-icon-arrowleft mui-pull-left"></a>
+			<h1 class="mui-title">分享</h1>
+		</header>
+		<div class="mui-content">
+			<div style="margin-top: 10px;" >
+				<p style="margin-left: 5px;">标题:</p><input id="title"  type="text" style="width:80%; margin-left: 50px;"/>
+			</div>
+			<div>
+				<p style="margin-left: 5px;">内容：</p><textarea style="width: 80%;margin-left: 50px;"  name="" id="txt" cols="30" rows="10"></textarea>
+			</div>
+			<button id="btn-share1" class="mui-btn mui-btn-block mui-btn-blue">分享到qq</button>
+			<button id="btn-share2" class="mui-btn mui-btn-block mui-btn-blue">分享到微信</button>
+		</div>
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function(){
+				var share1=null;
+				var share2=null;
+				plus.share.getServices(function (s){
+					var shares = s;
+					for(i in shares){
+						if('qq'===shares[i].id){
+							share1=shares[i];
+						}
+						if('weixin'===shares[i].id){
+							share2=shares[i];
+						}
+						
+					}
+//					shares.forEach(function(item){
+//						alert(item.id);
+//					})
+				},function(e){
+					alert("获取分享失败"+e.message);
+				})
+//				plus.share.ShareService()
+				document.getElementById('btn-share1').addEventListener('tap',function(){
+//					plus.share.sendWithSystem({})
+					var txt=document.getElementById('txt');
+					var tit=document.getElementById('title');
+					if(txt.value!=""){
+						share1.send({title:tit.value,content:txt.value,href:"http://www.dcloud.io/",extra:{scene:"WXSceneTimeline"}},function(){
+							plus.nativeUI.toast("分享成功");
+						},function(e){
+							plus.nativeUI.toast("分享失败"+e.message);
+						})
+					}else{
+						mui.alert("请输入分享的文字");
+					}
+					
+				})
+				document.getElementById('btn-share2').addEventListener('tap',function(){
+//					plus.share.sendWithSystem({})
+					var txt=document.getElementById('txt');
+					var tit=document.getElementById('title');
+					if(txt.value!=""){
+						share2.send({title:tit.value,content:txt.value,href:"http://www.dcloud.io/",extra:{scene:"WXSceneTimeline"}},function(){
+							plus.nativeUI.toast("分享成功");
+						},function(e){
+							plus.nativeUI.toast("分享失败"+e.message);
+						})
+					}else{
+						mui.alert("请输入分享的文字");
+					}
+					
+				})
+			})
+			
+		</script>
+	</body>
+
+</html>

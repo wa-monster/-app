@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content,.mui-content-padded,.link{
+				margin-top: 35px;
+			}
+			
+			.link{
+				text-align: center;
+			}
+			.mui-input-row label{
+				width: 25%;
+			}
+			.mui-input-row label~input {
+				width: 75%;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<!--登陆-->
+		<header class="mui-bar mui-bar-nav">
+			<a href="" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">登陆---终点小说</h1>
+		</header>
+		
+		<div class="mui-content">
+			<form action="shujuku.html" class="mui-input-group">
+				<div class="mui-input-row">
+					<label>账号</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入用户名" />
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input type="password" class="mui-input-password" placeholder="请输入密码" />
+				</div>
+			</form>
+			
+			<!--登录按钮-->
+			<div class="mui-content-padded">
+					<button type="button" id="login" class=" mui-btn mui-btn-block mui-btn-blue">登陆</button>
+			</div>
+			
+			<!--忘记密码和注册新用户-->
+			<div class="link" id="a">
+				<button type="button" class="mui-btn mui-btn-blue mui-btn mui-btn-outlined" id="zhuce">注册账号</button>
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-outlined" id="wangji">忘记密码</button>
+				<a id="remove">
+					清除账号密码
+				</a>
+			</div>
+		</div>
+
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/back.js"></script>
+		<script type="text/javascript">
+			mui.init()
+						//获取当前填入账号密码
+			var textName=document.getElementsByClassName("mui-input-clear")[0];
+			var passWord=document.getElementsByClassName("mui-input-password")[0];
+			
+			//清除本地存储
+			document.getElementById("remove").onclick=function(){
+				localStorage.clear()
+				var data={
+						data:[]
+					}
+					localStorage.setItem("zhanghao",JSON.stringify(data));
+			}
+						
+		
+			//判断是否需要自动登陆（功能改动需要注释）
+//			if(localStorage.getItem("loginNum")){
+//				mui.plusReady(function(){
+//					enter();
+//				})
+//				
+//			}
+
+
+			
+			//判断zhanghao是否存在
+			if(!localStorage.getItem("zhanghao")){
+					var data={
+						data:[]
+					}
+					localStorage.setItem("zhanghao",JSON.stringify(data));
+				}
+			
+			//登录事件
+			mui(".mui-content-padded").on("tap","#login",function(){
+				//判断未填账号密码的情况
+				if(textName.value==""||passWord.value==""){
+					mui.alert("请填写账户或密码");
+					return ;
+				}
+				if(!localStorage.getItem("zhanghao")){
+					mui.alert("账号未注册");
+					return ;
+				}
+						var data=localStorage.getItem("zhanghao")
+						data=JSON.parse(data);
+//						alert(data.data.length)
+						//循环判断账号密码
+						for(var i=0;i<data.data.length;i++){
+							var t=data.data[i].tel;
+							var n=data.data[i].name;
+							var shu=data.data[i].shu;
+							var username=data.data[i].username;
+							if(textName.value==n){
+								var p=data.data[i].pwd;
+								if(passWord.value==p){
+										var loginNum={
+											"name":n,
+											"pwd":p,
+											"tel":t,
+											"username":username,
+											"shu":shu
+										}
+										localStorage.setItem("loginNum",JSON.stringify(loginNum))
+										enter();
+								}else{
+									mui.alert("密码输入错误");
+								}
+								break;
+							}
+							if(i==data.data.length-1){
+								mui.alert("用户名输入不正确");
+							}
+						}
+				
+
+			});
+			
+			//进入主页面函数
+			function enter(){
+				if(plus.webview.getLaunchWebview()){
+					plus.webview.getLaunchWebview().close()
+				}else{
+					plus.webview.getWebviewById("index.html").close();
+				}
+				
+				index=plus.webview.create("index.html","index.html")
+				index.show();
+				plus.webview.currentWebview().close();
+			};
+		
+		
+		
+			//进入注册页面
+			sonTapAnima(".link","#zhuce","zhuce.html")
+			sonTapAnima(".link","#wangji","wangjimima.html");
+			//进入忘记密码页面
+			
+			
+			//back按键事件
+			mui.back = function(event) {
+				mui.plusReady(function(){
+					enter()
+				})
+	
+			};		
+		</script>
+	</body>
+
+</html>

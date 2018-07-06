@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		
+		<header class="mui-bar-nav mui-bar">
+			<h1 class="mui-title">终点小说网</h1>	
+		</header>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			//创建子页面，并加载小说文章
+			mui.plusReady(function(){
+				var bookname=plus.webview.currentWebview().bookname;
+				var shuname=plus.webview.currentWebview().shuname;
+				var author=plus.webview.currentWebview().author;
+				var updata=plus.webview.currentWebview().updata;
+//				alert(JSON.stringify(plus.webview.currentWebview()))
+				if(localStorage.getItem("loginNum")){
+					var login=JSON.parse(localStorage.getItem("loginNum"));
+					if(login.shu.length==0){
+								var shu={
+									"shu":bookname,
+									"shuname":shuname,
+									"author":author,
+									"updata":updata,
+									"index":1
+								}
+								login.shu.push();
+					}else{
+						for(var i=0;i<login.shu.length;i++){
+							if(login.shu[i].shu==bookname){
+								var shu={
+									"shu":bookname,
+									"shuname":shuname,
+									"author":author,
+									"updata":updata,
+									"index":1
+								}
+								login.shu[i]=shu;
+								localStorage.setItem("loginNum",JSON.stringify(login));
+								break;
+							}
+							if(i==login.shu.length-1){
+								var shu={
+									"shu":bookname,
+									"shuname":shuname,
+									"author":author,
+									"updata":updata,
+									"index":1
+								}
+								login.shu.push(shu);
+								localStorage.setItem("loginNum",JSON.stringify(login));
+							}
+						}
+					}
+					
+					var content=plus.webview.create("content.html","content",{
+						top:"45px",
+						bottom:"10px",
+						zindex:2
+					})
+					content.show();
+				}else{
+					localStorage.setItem("nologin",1);
+					
+					var content=plus.webview.create("content.html","content",{
+						top:"45px",
+						bottom:"10px",
+						zindex:2
+					})
+					content.show()
+				}
+			})
+		</script>
+	</body>
+
+</html>

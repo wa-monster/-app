@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>入口页面</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="js/mui.js" ></script>
+		<script>
+			mui.init({
+				preloadPages:[{
+					url:"index.html",
+					id:"index.html"
+				}]
+			});
+			document.addEventListener("plusready",function(){
+				//读取向导页阅读状态
+				var launchFlag=plus.storage.getItem("launchFlag");
+//				console.log(launchFlag);
+				if(launchFlag){
+					//打开首页
+					mui.openWindow({
+						url:"index.html",
+						id:"index.html"
+					});
+				}
+				else{
+				   //打开向导页
+				   mui.openWindow({
+				   	  url:"guide.html",
+				   	  id:"guide.html"
+				   })
+				}
+				
+			});
+		</script>
+	</body>
+</html>
